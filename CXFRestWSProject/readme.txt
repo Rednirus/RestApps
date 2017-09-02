@@ -65,3 +65,5 @@ beans.xml contains <server> tag to lists services which should be exposed as res
 	
 	
 	If you have any, queries, please write to rednirus@gmail.com
+	
+	Thanks
