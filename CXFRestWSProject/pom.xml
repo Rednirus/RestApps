@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+     
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.learn.cxf.in.java</groupId>
+    <artifactId>CXFRestWSProject</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>Simple CXF JAX-RS webapp service using spring configuration</name>
+    <description>Simple CXF JAX-RS webapp service using spring configuration</description>
+     
+    <organization>
+        <name>Learn CXF REST WS in Java</name>
+        <url>http://www.learninjava.com/</url>
+    </organization>
+    <!-- Change the version numbers or other configurations here -->
+    <properties>
+        <cxf.version>3.0.3</cxf.version>
+        <jackson.version>1.8.6</jackson.version>
+        <spring.version>3.2.6.RELEASE</spring.version>
+        <junit.version>4.11</junit.version>
+        <surefire.version>2.10</surefire.version>
+        <tomcat7.version>2.0</tomcat7.version>
+        <compiler.srcversion>1.6</compiler.srcversion>
+        <compiler.tgtversion>1.6</compiler.tgtversion>
+         
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <port.number>9090</port.number>
+        <service.url>http://localhost:${port.number}/cxf-rs-services</service.url>
+    </properties>
+     
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-client</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>${spring.version}</version>
+		    <scope>test</scope>
+		</dependency>
+    </dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                 
+                <!-- Optional plugin, This is added to specify service.url in pom.xml itself -->
+                <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-surefire-plugin</artifactId>
+                  <version>${surefire.version}</version>
+                  <configuration>
+                    <argLine>-Dservice.url=${service.url}</argLine>
+                  </configuration>
+                </plugin>
+                 
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>${tomcat7.version}</version>
+                    <executions>
+                        <execution>
+                            <id>default-cli</id>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <configuration>
+                                <port>${port.number}</port>
+                                <path>/cxf-rs-services</path>
+                                <useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                 
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${compiler.srcversion}</source>
+                        <target>${compiler.tgtversion}</target>
+                    </configuration>
+                </plugin>
+                 
+                <!-- Optional plugin, This is added to create an eclipse compatible project. To do it, use : mvn eclipse:eclipse -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-eclipse-plugin</artifactId>
+                    <configuration>
+                        <projectNameTemplate>[artifactId]-[version]</projectNameTemplate>
+                        <wtpmanifest>true</wtpmanifest>
+                        <wtpapplicationxml>true</wtpapplicationxml>
+                        <wtpversion>2.0</wtpversion>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
