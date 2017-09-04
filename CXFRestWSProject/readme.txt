@@ -1,5 +1,14 @@
 This project is to learn building JAX-RS Webservices using CXF on tomcat server. I have used a tech blog http://www.learninjava.com/pages/restful-webservice-using-cxf.php as reference to build this project. I  have modified it to use clients for using REST services  running on cxf server. Steps are very simple.
 
+To run this project:
+go to pom.xml path and run below command
+1. build and run : mvn clean package -DskipTests=true tomcat7:run
+2. build and package
+	a. delete and package again -> mvn clean package -DskipTests
+	b. run tomcat- > mvn tomcat7:run -DskipTests
+
+Details :
+
 Basic steps are very clearly mentioned in linkk above.
 CXFServlet set up in web.xml listens to incoming requests and forwards those requests rest service deployed on server.
 beans.xml contains <server> tag to lists services which should be exposed as rest services.
