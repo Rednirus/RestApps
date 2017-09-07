@@ -54,7 +54,7 @@ beans.xml contains <server> tag to lists services which should be exposed as res
 	http://localhost:9090/cxf-rs-services/hello-common-service/hello-universe/echo/yourName-> HelloUniverseService
 	
 	
-	Now to access these services from other application, lets say client application, we use htt: conduit to open http connection between client and server, 
+	Now to access these services from other application, lets say client application, we use http: conduit define URL Patterns which should be handled by defined service, 
 	1. it contains conduit name which is REST interface which is exposed as webservice on server side
 	2. timeout parameters
 	3. address to this service and providers which are used to help transfer data properly. Like JacksonJsonProvider is used for JSON conversion of data which is returned from this service.
