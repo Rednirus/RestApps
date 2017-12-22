@@ -38,7 +38,7 @@ beans.xml contains <server> tag to lists services which should be exposed as res
 		d. hello-world/echo/yourName-> REST resources in HelloWorldService.
 	HelloUniverseServiceImpl can be access using /hello-universe-service in beans.xml <server> tag. 
 	
-	We could use common address to access both services entioned above. To use that, beans.xml would look like this
+	We could use common address to access both services mentioned above. To use that, beans.xml would look like this
 	<jaxrs:server id="services" address="/hello-common-service">
         <jaxrs:serviceBeans>
             <bean class="com.learn.cxf.in.java.HelloWorldServiceImpl"/>
@@ -54,9 +54,9 @@ beans.xml contains <server> tag to lists services which should be exposed as res
 	http://localhost:9090/cxf-rs-services/hello-common-service/hello-universe/echo/yourName-> HelloUniverseService
 	
 	
-	Now to access these services from other application, lets say client application, we use http: conduit define URL Patterns which should be handled by defined service, 
-	1. it contains conduit name which is REST interface which is exposed as webservice on server side
-	2. timeout parameters
+	Now to access these services from other application, lets say client application, we create a client for rest service deployed:
+	1. it contains conduit name which is REST interface pattern which is exposed as webservice on server side
+	2. timeout parameters, It contains lots of other parameters like authentication, tls confgurations etc. We will not use them here for simplicity
 	3. address to this service and providers which are used to help transfer data properly. Like JacksonJsonProvider is used for JSON conversion of data which is returned from this service.
 	
 	<http-conf:conduit name=".*HelloWorldService.*">
