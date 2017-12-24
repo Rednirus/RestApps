@@ -3,6 +3,7 @@ package com.learn.cxf.in.java;
 import static org.junit.Assert.assertEquals;
 
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,42 +13,33 @@ import org.apache.cxf.helpers.IOUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.MappingJsonFactory;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.learn.cxf.in.java.JsonBean;
+import com.learn.cxf.in.java.date.utility.Java8LocalDateJacksonJaxbJsonProvider;
 
 public class HelloWorldTest {
-    private static String endpointUrl;
-
-    @BeforeClass
-    public static void beforeClass() {
-        endpointUrl = System.getProperty("service.url");
-    }
+    private static String endpointUrl ="http://localhost:9090/cxf-rs-services/hello-universe-service";
 
     @Test
     public void testPing() throws Exception {
-        WebClient client = WebClient.create(endpointUrl + "/hello/echo/SierraTangoNevada");
+        WebClient client = WebClient.create(endpointUrl+"/hello-universe/echo/suri");
         Response r = client.accept("text/plain").get();
         assertEquals(Response.Status.OK.getStatusCode(), r.getStatus());
         String value = IOUtils.toString((InputStream)r.getEntity());
-        assertEquals("SierraTangoNevada", value);
+        assertEquals("Hello from Universe: suri", value);
     }
 
     @Test
-    public void testJsonRoundtrip() throws Exception {
+    public void testLocalDate() throws Exception {
         List<Object> providers = new ArrayList<Object>();
-        providers.add(new org.codehaus.jackson.jaxrs.JacksonJsonProvider());
-        JsonBean inputBean = new JsonBean();
-        inputBean.setVal1("Maple");
-        WebClient client = WebClient.create(endpointUrl + "/hello/jsonBean", providers);
+        providers.add(new Java8LocalDateJacksonJaxbJsonProvider());
+        WebClient client = WebClient.create(endpointUrl+"/hello-universe/getToday?today="+LocalDate.now(), providers);
         Response r = client.accept("application/json")
-            .type("application/json")
-            .post(inputBean);
+            .type("application/json").get();
         assertEquals(Response.Status.OK.getStatusCode(), r.getStatus());
         MappingJsonFactory factory = new MappingJsonFactory();
         JsonParser parser = factory.createJsonParser((InputStream)r.getEntity());
-        JsonBean output = parser.readValueAs(JsonBean.class);
-        assertEquals("Maple", output.getVal2());
+        LocalDate output = parser.readValueAs(LocalDate.class);
+        System.out.println(output);
     }
 }

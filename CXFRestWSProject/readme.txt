@@ -75,4 +75,10 @@ beans.xml contains <server> tag to lists services which should be exposed as res
 	
 	If you have any, queries, please write to rednirus@gmail.com
 	
+	
+	If you are working on java 8 and need to pass LocalDate/LocalDateTime as parameters to rest service,
+	default jsonProviders will not work. Because both these java 8 classes don't have default constrcutors.
+	You need to write your own Object mappers to serialize/deserialize date objects. I have written these above in data/utility package
+	Please have a look.
+	
 	Thanks

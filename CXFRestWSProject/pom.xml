@@ -15,14 +15,14 @@
     </organization>
     <!-- Change the version numbers or other configurations here -->
     <properties>
-        <cxf.version>3.0.3</cxf.version>
+        <cxf.version>3.1.9</cxf.version>
         <jackson.version>1.8.6</jackson.version>
         <spring.version>3.2.6.RELEASE</spring.version>
         <junit.version>4.11</junit.version>
         <surefire.version>2.10</surefire.version>
         <tomcat7.version>2.0</tomcat7.version>
-        <compiler.srcversion>1.6</compiler.srcversion>
-        <compiler.tgtversion>1.6</compiler.tgtversion>
+        <compiler.srcversion>1.8</compiler.srcversion>
+        <compiler.tgtversion>1.8</compiler.tgtversion>
          
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <port.number>9090</port.number>

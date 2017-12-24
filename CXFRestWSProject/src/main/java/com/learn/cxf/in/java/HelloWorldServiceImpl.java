@@ -1,6 +1,7 @@
 package com.learn.cxf.in.java;
 
-import javax.ws.rs.core.Response;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class HelloWorldServiceImpl implements HelloWorldService{
 
@@ -10,9 +11,10 @@ public class HelloWorldServiceImpl implements HelloWorldService{
 	}
 
 	@Override
-	public Response modifyJson(JsonBean input) {
-		input.setVal2(input.getVal1());
-        return Response.ok().entity(input).build();
+	public String getCurrentTime(LocalDateTime currentTime) {
+		return currentTime.format(DateTimeFormatter.ofPattern("dd/mm/yyyy HH MM ss"));
 	}
+
+
 
 }

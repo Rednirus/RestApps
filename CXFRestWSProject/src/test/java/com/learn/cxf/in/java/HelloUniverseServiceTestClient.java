@@ -1,5 +1,7 @@
 package com.learn.cxf.in.java;
 
+import java.time.LocalDate;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,12 @@ public class HelloUniverseServiceTestClient {
 	@Test
 	public void test(){
 		String s = helloUniverseService.ping("Suri");
+		System.out.println(" "+s);
+	}
+	
+	@Test
+	public void testLocalDate(){
+		String s = helloUniverseService.getToday(LocalDate.now());
 		System.out.println(" "+s);
 	}
 }
